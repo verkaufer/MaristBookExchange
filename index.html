@@ -1,0 +1,182 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!-- Consider adding an manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" itemscope itemtype="http://schema.org/Product"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+
+    <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+       More info: h5bp.com/b/378 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Gumby - A Flexible, Responsive CSS Framework - Powered by SASS</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="humans.txt">
+
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+
+    <!-- Facebook Metadata /-->
+    <meta property="fb:page_id" content="" />
+    <meta property="og:image" content="" />
+    <meta property="og:description" content=""/>
+    <meta property="og:title" content=""/>
+
+    <!-- Google+ Metadata /-->
+    <meta itemprop="name" content="">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <!-- We highly recommend you use SASS and write your custom styles in sass/_custom.scss.
+       However, there is a blank style.css in the css directory should you prefer -->
+    <link rel="stylesheet" href="css/gumby.css">
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+
+    <script src="js/libs/modernizr-2.6.2.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+</head>
+
+<style>
+	html, body {
+		background: #fefefe;
+	}
+
+    h1.head{
+        font-size: 75px;
+        font-family: Georgia;
+        font-style: italic;
+    }
+
+    .directions{
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .center{
+        text-align: center;
+    }
+
+</style>
+
+<body>
+
+<div class="container">
+
+  	<div class="row">
+  	  <div class="twelve columns special head">
+  	  	<h1 class="head">Marist Book Exchange</h1>
+<!--   	  	<h2>A new way to resell books</h2> -->
+  	  </div>
+  	</div>
+
+
+    <div class="row navbar" id="nav1">
+    <!-- Toggle for mobile navigation, targeting the <ul> -->
+    <a class="toggle" gumby-trigger="#nav1 > .row > ul" href="#"><i class="icon-menu"></i></a>
+    <ul class="twelve columns">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Profile</a></li>
+    <li>
+    <a href="#">Browse</a>
+    <div class="dropdown">
+    <ul>
+    <li><a href="#">Search</a></li>
+    <li><a href="#">Open Trades</a></li>
+    <li><a href="#">My Trades</a></li>
+    <li><a href="#">Statistics</a></li>
+    <li><a href="#"></a></li>
+    </ul>
+    </div>
+    </li>
+    <li><a href="#">Login/Register</a></li>
+    </ul>
+    </div>
+
+    <div class="row">
+        <div class="twelve columns directions">
+            <h3 class="directions">Find Your Books</h3>
+            <form action="books.php" method="POST">
+                <div class="row center">
+                   <ul class="six columns push_three">
+                        <li class="field center"><input class="email input" type="email" placeholder="Type Book ISBN" /></li>
+                          <div class="medium primary btn"><input type="submit" value="Submit" /></div>
+                    </ul>
+                <input type="hidden" value="find" name="action" />
+            </form>
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="twelve columns directions">
+            <h3 class="directions">Sell Your Books</h3>
+                        <form action="books.php" method="POST">
+                <div class="row center">
+                   <ul class="six columns push_three">
+                        <li class="field center"><input class="email input" type="email" placeholder="Type Book ISBN" /></li>
+                          <div class="medium primary btn"><input type="submit" value="Submit" /></div>
+                    </ul>
+                <input type="hidden" value="sell" name="action" />
+            </form>
+            
+        </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="twelve columns center">
+            Marist Book Exchange (mBEx) &copy; 2013 | Gunter &amp; Prisiciandaro
+        </div>
+    </div>
+
+
+	</div> <!--! end of #container -->
+
+</section>
+
+
+  <!-- JavaScript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.8.3.min.js"><\/script>')</script>
+
+  <!--
+  Include gumby.js followed by UI modules.
+  Or concatenate and minify into a single file
+  <script src="js/libs/gumby.js"></script>
+  <script src="js/libs/ui/gumby.retina.js"></script>
+  <script src="js/libs/ui/gumby.fixed.js"></script>
+  <script src="js/libs/ui/gumby.skiplink.js"></script>
+  <script src="js/libs/ui/gumby.toggleswitch.js"></script>
+  <script src="js/libs/ui/gumby.checkbox.js"></script>
+  <script src="js/libs/ui/gumby.radiobtn.js"></script>
+  <script src="js/libs/ui/gumby.tabs.js"></script>
+  <script src="js/libs/ui/jquery.validation.js"></script>
+  -->
+  <script src="js/libs/gumby.min.js"></script>
+  <script src="js/plugins.js"></script>
+  <script src="js/main.js"></script>
+
+  <!-- Change UA-XXXXX-X to be your site's ID -->
+  <script>
+    window._gaq = [['_setAccount','UAXXXXXXXX1'],['_trackPageview'],['_trackPageLoadTime']];
+    Modernizr.load({
+      load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
+    });
+  </script>
+
+  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
+       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+  <!--[if lt IE 7 ]>
+    <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+  <![endif]-->
+
+  </body>
+</html>
