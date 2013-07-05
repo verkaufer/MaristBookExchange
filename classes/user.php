@@ -18,23 +18,27 @@ class User
 
 	public function login($username, $password){
 
-		$login = $this->pdo->prepare("SELECT * FROM users WHERE username= :user");
+		//gonna need to add some password encrypthing code here
+
+		$password = md5($password);
+
+		$login = $this->pdo->prepare("SELECT * FROM `users` WHERE username= :user AND password = :pass");
 		$login->bindValue(':user', $username, PDO::PARAM_STR);
+		$login->bindValue(':pass', $password, PDO::PARAM_STR);
 		$login->execute();
 
 		$result = $login->fetch(PDO::FETCH_ASSOC);
 
-		$password = //do some kind of hashing here
+		if($result['password'] == $password && $result['username'] == $username){
+			if($result['usergroup'] > 1)
+			{
+				$_SESSION['group'] = $result['usergroup'];
+			}
 
-		if($result['password'] == $password){
-			
 			$_SESSION['uid'] = $result['id'];
 			return TRUE;
-		}
-
-		if($result['usergroup'] > 1)
-		{
-			$_SESSION['group'] = $result['usergroup'];
+		} else {
+			return FALSE;
 		}
 
 
@@ -43,22 +47,26 @@ class User
 	public function register($user, $pass, $email){
 
 		//select and see if user already exists
-		$registerCheck = $this->pdo->prepare("SELECT COUNT(*) FROM users WHERE username = :user OR email = :email");
+		$registerCheck = $this->pdo->prepare("SELECT COUNT(*) FROM `users` WHERE username = :user OR email = :email");
 			$registerCheck->bindValue(':user', $user);
 			$registerCheck->bindValue(':email', $email);
 		$registerCheck->execute();
 
 		if($registerCheck->fetchColumn() != 0){
+			$_SESSION['REGISTER.ERROR'] = "A user already exists with this username or email address.";
 			return FALSE;
+		} else{
+
+			$pass = md5($pass);//maybe add salt here?
+
+			$register = $this->pdo->prepare("INSERT INTO users (username, password, email) VALUES (:user, :pass, :email)");
+				$register->bindValue(':user', $user, PDO::PARAM_STR);
+				$register->bindValue(':pass', $pass, PDO::PARAM_STR);
+				$register->bindValue(':email', $email, PDO::PARAM_STR);
+			$register->execute();
+			$_SESSION['FLASH.DATA'] = "Registration successful! Please login to begin using mBEx.";
+			return TRUE;
 		}
-
-		$register = $this->pdo->prepare("INSERT INTO users (username, password, email) VALUES (:user, :pass, :email");
-			$register->bindValue(':user', $user);
-			$register->bindValue(':pass', $pass);
-			$register->bindValue(':email', $email);
-		$register->execute();
-
-		return TRUE;
 
 	}
 
@@ -103,5 +111,16 @@ class User
 		header("Location: index.php");
 
 	}
+
+// 	private function generateSalt($max = 15) {
+//         $characterList = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*?";
+//         $i = 0;
+//         $salt = "";
+//         while ($i < $max) {
+//             $salt .= $characterList{mt_rand(0, (strlen($characterList) - 1))};
+//             $i++;
+//         }
+//         return $salt;
+// }
 
 }
